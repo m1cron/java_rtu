@@ -1,4 +1,4 @@
-package com.company;
+package ru.micron.task1;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -7,7 +7,7 @@ public class Main {
     public static void num3(){
         int[] arr = {1,2,3,4};
         int res = 0;
-        for(int i = 0; i < arr.length; i++)
+        for (int i = 0; i < arr.length; i++)
             res += arr[i];
         System.out.println(res);
     }
@@ -55,6 +55,6 @@ public class Main {
         //num4(args);
         //num5();
         //num6();
-        //num7(5);
+        num7(5);
     }
 }
