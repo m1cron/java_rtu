@@ -13,4 +13,14 @@ public class Circle {
     public double getL() { return L; }
     public long getR() { return r; }
     public double getS() { return S; }
+
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "r=" + r +
+                ", D=" + D +
+                ", L=" + L +
+                ", S=" + S +
+                '}';
+    }
 }

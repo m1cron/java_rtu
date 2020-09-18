@@ -35,11 +35,19 @@ public class Book {
         this.author = author;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
+    public void setYear(int year) { this.year = year; }
 
     public void setPages(int pages) {
         this.pages = pages;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year +
+                ", pages=" + pages +
+                '}';
     }
 }

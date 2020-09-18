@@ -56,4 +56,16 @@ public class Human {
         System.out.printf("name = %s\nh = %d\n, Head HP = %d\nHands HP = %d\n\n",
                 getName(), getHeight(), head.getHP(), hands.getHP());
     }
+
+    @Override
+    public String toString() {
+        return "Human{" +
+                "height=" + height +
+                ", name='" + name + '\'' +
+                ", legs=" + legs +
+                ", hands=" + hands +
+                ", body=" + body +
+                ", head=" + head +
+                '}';
+    }
 }
