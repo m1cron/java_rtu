@@ -16,5 +16,4 @@ public class Dog {
     public int getHumanAge() { return this.age * 7; }
     @Override
     public String toString() { return "Name: " + this.name + "Age: " + this.age; }
-
 }
