@@ -27,7 +27,6 @@ public class Test {
         Shape s4 = new Square(10);
         System.out.println(s4);
         System.out.println(s4.getArea());
-        System.out.println(s4.getColor());
 
         Rectangle r2 = (Rectangle) s4;
         System.out.println(r2);
