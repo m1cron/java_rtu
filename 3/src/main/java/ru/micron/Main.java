@@ -1,27 +1,38 @@
 package ru.micron;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
 
-    private static final Lock lock = new ReentrantLock();
-    private static final Set<Integer> set = new HashSet<>();
-    private static int i = 0;
-
-    private static void add() {
-        lock.lock();
-        set.add(i++);
-        lock.unlock();
+    public static void main(String[] args) {
+        testSet();
     }
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            Thread one = new Thread(Main::add);
+    public static void testSet(){
+        Map<Integer, Integer> map = new SemaphoreMap<>();
+        Runnable task1 = () -> {
+            for(int i = 1; i < 25; i++){
+                map.put(i, i);
+            }
+        };
+        Runnable task2 = () -> {
+            for (int i = 26; i < 51; i++){
+                map.put(i, i);
+            }
+        };
+
+        Thread thread1 = new Thread(task1);
+        Thread thread2 = new Thread(task2);
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
         }
+
+        System.out.println(map.toString());
     }
 }
