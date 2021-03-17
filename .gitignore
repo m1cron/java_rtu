@@ -143,6 +143,8 @@ buildNumber.properties
 .gradle
 build/
 gradle
+gradlew
+gradlew.bat
 
 # Ignore Gradle GUI config
 gradle-app.setting
