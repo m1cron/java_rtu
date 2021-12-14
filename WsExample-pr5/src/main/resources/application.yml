@@ -1,0 +1,9 @@
+server:
+  port: 80
+spring:
+  jpa:
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/practice
+    username: postgres
+    password: root

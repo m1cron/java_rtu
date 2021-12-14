@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat WebSocket</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+    <script type="text/javascript">
+        var stompClient = null;
+
+        function setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('conversationDiv').style.visibility
+                = connected ? 'visible' : 'hidden';
+            document.getElementById('response').innerHTML = '';
+        }
+
+        function connect() {
+            var socket = new SockJS('/webs');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function(frame) {
+                setConnected(true);
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/messages', function(message) {
+                    showMessageOutput(JSON.parse(message.body));
+                });
+            });
+        }
+
+        function disconnect() {
+            if(stompClient != null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log("Disconnected");
+        }
+
+        function sendMessage() {
+            var text = document.getElementById('text').value;
+            stompClient.send("/app/webs", {},
+                JSON.stringify({'in':text}));
+        }
+
+        function showMessageOutput(message) {
+            var response = document.getElementById('response');
+            var p = document.createElement('p');
+            p.style.wordWrap = 'break-word';
+            p.appendChild(document.createTextNode(message.in));
+            response.appendChild(p);
+        }
+    </script>
+</head>
+<body onload="disconnect()">
+<div>
+    <div>
+        <button id="connect" onclick="connect();">Подключиться</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">
+            Отключиться
+        </button>
+    </div>
+    <br />
+    <div id="conversationDiv">
+        <input type="text" id="text" placeholder="Введите текст..."/>
+        <button id="sendMessage" onclick="sendMessage();">Отправить</button>
+        <p id="response"></p>
+    </div>
+</div>
+
+</body>
+</html>
